@@ -26,4 +26,17 @@ stages :
               goals: 'clean package'
               codeCoverageToolOption: JaCoCo
               codeCoverageSourceDirectories: +:com.workshop.*
-              # sonarQubeRunAnalysis: true
+
+      - job: Frontend
+        displayName: Build Frontend Application
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - task: NodeTool@0 
+          - script: npm install -d --prefix ./frontend
+          - script: npm run tests --prefix ./frontend
+          - task: PublishTestResults@2
+            condition: succeededOrFailed()
+            inputs:
+              testRunner: JUnit
+              testResultsFiles: '**/TEST-RESULTS.xml'
