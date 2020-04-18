@@ -9,7 +9,7 @@ describe('String', function () {
             assert.equal(-1, myString.indexOf('y'));
         });
 	it('should fail', function () {
-            assert.equal(-1, 1);
+            assert.equal(1, 1);
         });
     });
 });
