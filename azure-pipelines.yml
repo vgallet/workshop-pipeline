@@ -24,3 +24,6 @@ stages :
               publishJUnitResults: true
               testResultsFiles: '**/surefire-reports/TEST-*.xml'
               goals: 'clean package'
+              codeCoverageToolOption: JaCoCo
+              codeCoverageSourceDirectories: +:com.workshop.*
+              # sonarQubeRunAnalysis: true
