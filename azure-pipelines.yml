@@ -64,6 +64,13 @@ stages :
         pool:
           vmImage: '$(AGENT_IMAGE)'
         steps:
+          - task: CacheBeta@1
+            inputs:
+              key: 'npm | "$(Agent.OS)" | **/package-lock.json'
+              restoreKeys: |
+                npm | "$(Agent.OS)"
+              path: ./frontend/node_modules
+            displayName: Cache Node dependencies
           - task: NodeTool@0 
           - script: npm install -d --prefix ./frontend
           - script: npm run tests --prefix ./frontend
