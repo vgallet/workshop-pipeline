@@ -5,6 +5,16 @@
 
 name: 'Build_$(SourceBranchName)'
 
+parameters:
+  - name: RUN_BUILDING_APPLICATION
+    displayName: Run Building Backend / Frontend Application
+    type: "string"
+    default: "all"
+    values:
+    - "all"
+    - "backend"
+    - "frontend"
+
 variables:
   - name: 'System.debug'
     value: 'true'
@@ -20,6 +30,7 @@ stages :
     jobs:
       - job: Backend
         displayName: Build Backend Application
+        condition: ne('${{ parameters.RUN_BUILDING_APPLICATION }}', 'frontend')
         pool:
           vmImage: '$(AGENT_IMAGE)'
         steps:
@@ -37,6 +48,7 @@ stages :
 
       - job: Frontend
         displayName: Build Frontend Application
+        condition: ne('${{ parameters.RUN_BUILDING_APPLICATION }}', 'backend')
         pool:
           vmImage: '$(AGENT_IMAGE)'
         steps:
