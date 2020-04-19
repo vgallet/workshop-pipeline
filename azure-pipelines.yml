@@ -5,6 +5,12 @@
 
 name: 'Build_$(SourceBranchName)'
 
+variables:
+  - name: 'System.debug'
+    value: 'true'
+  - name: 'AGENT_IMAGE'
+    value: 'ubuntu-latest'
+
 trigger:
 - master
 
@@ -15,7 +21,7 @@ stages :
       - job: Backend
         displayName: Build Backend Application
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: '$(AGENT_IMAGE)'
         steps:
           - task: Maven@3
             inputs:
@@ -32,7 +38,7 @@ stages :
       - job: Frontend
         displayName: Build Frontend Application
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: '$(AGENT_IMAGE)'
         steps:
           - task: NodeTool@0 
           - script: npm install -d --prefix ./frontend
