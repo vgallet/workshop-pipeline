@@ -38,7 +38,9 @@ stages :
           MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
           MAVEN_OPTS: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
         steps:
-          - script: echo $(my-password)
+          - template: print-variable.yml
+            parameters:
+              VARIABLE: $(my-password)
           - task: CacheBeta@1
             inputs:
               key: 'maven | "$(Agent.OS)" | **/pom.xml'
