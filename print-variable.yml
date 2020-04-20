@@ -1,0 +1,7 @@
+parameters:
+- name: VARIABLE
+  type: string
+  default: “Hello World”
+
+steps:
+- script: echo ${{ parameters.VARIABLE }}
