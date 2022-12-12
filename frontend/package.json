@@ -9,7 +9,7 @@
     "email": ""
   },
   "dependencies": {
-    "express": "^4.13.3",
+    "express": "^4.17.3",
     "mocha": "^3.0.0"
   },
   "devDependencies": {
